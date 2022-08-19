@@ -2,10 +2,6 @@ name: Build Docker Images
 
 on:
   push:
-    branches:
-      - main
-      - alpha
-      - beta
     tags:
       - v*
 
@@ -40,7 +36,7 @@ jobs:
       - name: Docker :alpha meta
         id: meta-alpha
         uses: docker/metadata-action@v4.0.1
-        if: github.branch == "alpha"
+        if: contains(github.ref_name, 'alpha')
         with:
           images: mceachen/test
           flavor: |
@@ -51,7 +47,7 @@ jobs:
       - name: Docker :beta meta
         id: meta-beta
         uses: docker/metadata-action@v4.0.1
-        if: github.branch == "beta"
+        if: contains(github.ref_name, 'beta')
         with:
           images: mceachen/test
           flavor: |
@@ -64,7 +60,7 @@ jobs:
       - name: Docker :stable meta
         id: meta-stable
         uses: docker/metadata-action@v4.0.1
-        if: github.branch == "main"
+        if: ${{ !contains(github.ref_name, 'alpha') && !contains(github.ref_name, 'beta') }}
         with:
           images: mceachen/test
           tags: |
