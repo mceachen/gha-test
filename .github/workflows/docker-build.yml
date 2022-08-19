@@ -1,13 +1,14 @@
 name: Build Docker Images
 
 on:
-  # We only need to build tags. If we include branches, we build twice.
-  # branches:
-  #   - main
-  #   - alpha
-  #   - beta
-  tags:
-    - v*
+  push:
+    # We only need to build on tags. If we include branches, we build twice.
+    # branches:
+    #   - main
+    #   - alpha
+    #   - beta
+    tags:
+      - v*
 
 jobs:
   build:
