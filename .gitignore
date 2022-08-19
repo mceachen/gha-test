@@ -1,0 +1,4 @@
+.dccache
+*.log
+.DS_Store
+.history
