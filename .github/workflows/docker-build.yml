@@ -31,7 +31,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4.0.1
         with:
-          images: photostructure/server
+          images: mceachen/test
           flavor: |
             latest=false
           tags: |
@@ -42,7 +42,7 @@ jobs:
         uses: docker/metadata-action@v4.0.1
         if: github.branch == "alpha"
         with:
-          images: photostructure/server
+          images: mceachen/test
           flavor: |
             latest=false
           tags: |
@@ -53,7 +53,7 @@ jobs:
         uses: docker/metadata-action@v4.0.1
         if: github.branch == "beta"
         with:
-          images: photostructure/server
+          images: mceachen/test
           flavor: |
             latest=false
           tags: |
@@ -66,7 +66,7 @@ jobs:
         uses: docker/metadata-action@v4.0.1
         if: github.branch == "main"
         with:
-          images: photostructure/server
+          images: mceachen/test
           tags: |
             # Tag stable with :alpha and :beta so testers always get the latest
             type=raw,value=alpha
@@ -88,8 +88,4 @@ jobs:
           context: .
           file: ./Dockerfile
           platforms: linux/amd64,linux/arm64
-          tags:
-            - ${{ steps.meta.outputs.tags }}
-            - ${{ steps.meta-alpha.outputs.tags }}
-            - ${{ steps.meta-beta.outputs.tags }}
-            - ${{ steps.meta-stable.outputs.tags }}
+          tags: ${{ steps.meta.outputs.tags }} ${{ steps.meta-alpha.outputs.tags }} ${{ steps.meta-beta.outputs.tags }} ${{ steps.meta-stable.outputs.tags }}
