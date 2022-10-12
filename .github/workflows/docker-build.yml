@@ -31,7 +31,7 @@ jobs:
 
       - name: Docker version meta
         id: meta
-        uses: docker/metadata-action@v4.0.1
+        uses: docker/metadata-action@v4.1.0
         with:
           images: mceachen/test
           flavor: |
